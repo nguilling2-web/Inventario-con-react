@@ -18,6 +18,35 @@ const App = () => {
     }
   };
 
+
+  const editarPrecioProducto = (id) => {
+    
+    const nuevoPrecioStr = window.prompt("Ingrese el nuevo precio para este producto:");
+
+    
+    if (nuevoPrecioStr === null || nuevoPrecioStr.trim() === '') return;
+
+    const nuevoPrecio = parseFloat(nuevoPrecioStr);
+
+    
+    if (isNaN(nuevoPrecio) || nuevoPrecio <= 0) {
+      alert("El precio ingresado no es válido. Debe ser un número mayor a cero.");
+      return;
+    }
+
+    
+    const productosActualizados = productos.map((producto) => {
+      if (producto.id === id) {
+        
+        return { ...producto, precio: nuevoPrecio }; 
+      }
+      return producto; 
+    });
+
+    
+    setProductos(productosActualizados);
+  };
+
   const productosFiltrados = productos.filter((producto) => {
     if (filtro === 'Todos') return true;
     return producto.categoria === filtro;
@@ -31,7 +60,7 @@ const App = () => {
     <div className="contenedor">
       <h1>Administración de Inventario</h1>
 
-      {/* Llamamos al componente que creamos en la otra carpeta */}
+      {/* Llamamos al componente del formulario */}
       <Formulario agregarProducto={agregarProductoNuevo} />
 
       <div className="controles">
@@ -73,6 +102,14 @@ const App = () => {
                 <td>${producto.precio.toFixed(2)}</td>
                 <td>{producto.categoria}</td>
                 <td>
+                  <button 
+                    onClick={() => editarPrecioProducto(producto.id)} 
+                    className="btn-guardar" 
+                    style={{ marginRight: '10px' }} 
+                  >
+                    Editar Precio
+                  </button>
+
                   <button 
                     onClick={() => eliminarProducto(producto.id)} 
                     className="btn-eliminar"
