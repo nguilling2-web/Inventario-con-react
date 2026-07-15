@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Formulario from './components/Formulario'; // Importamos desde la carpeta components
+import Formulario from './components/Formulario'; 
 import './App.css'; 
 
 const App = () => {
