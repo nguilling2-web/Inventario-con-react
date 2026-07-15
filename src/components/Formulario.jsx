@@ -51,13 +51,13 @@ const Formulario = ({ agregarProducto }) => {
           />
         </div>
 
-     <div className="grupo-input">
+    <div className="grupo-input">
           <label>Precio ($):</label>
-          <input 
-            type="text" 
-            inputMode="decimal"
-            value={precio} 
-            onChange={(e) => setPrecio(e.target.value)} 
+          <input
+            type="number"
+            step="0.01"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
           />
         </div>
 
